@@ -6,7 +6,7 @@ A super simple input component that formats as you type.
 <Input format="## - ## - ##">
 ```
 
-![Formatted input](/images/input.gif)
+![Formatted input](https://raw.githubusercontent.com/danielyefet/react-input-auto-format/main/images/input.gif)
 
 ## Quick start
 
