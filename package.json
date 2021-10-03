@@ -10,6 +10,7 @@
     "format"
   ],
   "license": "MIT",
+  "repository": "danielyefet/react-input-auto-format",
   "main": "dist/index.js",
   "files": [
     "dist"
