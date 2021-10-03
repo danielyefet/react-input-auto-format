@@ -1,7 +1,33 @@
 {
-  "name": "react-format-input",
+  "name": "react-input-auto-format",
   "version": "1.0.0",
   "author": "Daniel Yefet <daniel.yefet@gmail.com>",
+  "description": "A super simple input component that formats as you type.",
+  "keywords": [
+    "react",
+    "input",
+    "auto",
+    "format"
+  ],
   "license": "MIT",
-  "main": "index.js"
+  "main": "dist/index.js",
+  "files": [
+    "dist"
+  ],
+  "devDependencies": {
+    "@babel/core": "^7.15.5",
+    "@babel/preset-react": "^7.14.5",
+    "@rollup/plugin-babel": "^5.3.0",
+    "react": "^17.0.2",
+    "react-dom": "^17.0.2",
+    "rollup": "^2.58.0"
+  },
+  "peerDependencies": {
+    "react": "^17.8.0",
+    "react-dom": "^17.8.0"
+  },
+  "scripts": {
+    "build": "rollup -c",
+    "start": "rollup -c -w"
+  }
 }
