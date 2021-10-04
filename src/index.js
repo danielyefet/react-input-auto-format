@@ -35,6 +35,10 @@ function stripPatternCharacters(value) {
   return value.replace(/[^\dA-z]/g, '');
 }
 
+function isUserCharacter(character) {
+  return /[\dA-z]/.test(character);
+}
+
 function Input({
   onChange = noop,
   onValueChange = noop,
@@ -56,9 +60,11 @@ function Input({
     let rawValue = stripPatternCharacters(inputValue);
 
     if (didDelete) {
-      const nonNumericWasDeleted = /[^\dA-z]/.test([...value][cursorPosition]);
+      const patternCharacterDeleted = !isUserCharacter(
+        [...value][cursorPosition]
+      );
 
-      if (nonNumericWasDeleted) {
+      if (patternCharacterDeleted) {
         const firstBit = inputValue.substr(0, cursorPosition);
         const rawFirstBit = stripPatternCharacters(firstBit);
 
@@ -75,8 +81,27 @@ function Input({
 
     const formattedValue = format(rawValue, pattern);
 
-    infoRef.current.formattingWasAdded =
-      formattedValue.length - value.length > 1;
+    infoRef.current.endOfSection = false;
+
+    if (!didDelete) {
+      const formattedCharacters = [...formattedValue];
+      const nextCharacter = formattedCharacters[cursorPosition];
+      const nextCharacterIsPattern = !isUserCharacter(nextCharacter);
+      const nextUserCharacterIndex = formattedValue
+        .substr(cursorPosition)
+        .search(/[\dA-z]/);
+      const numbersAhead = nextUserCharacterIndex !== -1;
+
+      infoRef.current.endOfSection = nextCharacterIsPattern && !numbersAhead;
+
+      if (
+        nextCharacterIsPattern &&
+        !isUserCharacter(formattedCharacters[cursorPosition - 1]) &&
+        numbersAhead
+      )
+        infoRef.current.cursorPosition =
+          cursorPosition + nextUserCharacterIndex + 1;
+    }
 
     onValueChange(rawValue);
     onChange(event);
@@ -84,10 +109,11 @@ function Input({
   }
 
   useEffect(() => {
-    const { cursorPosition, formattingWasAdded } = infoRef.current;
+    const { cursorPosition, endOfSection } = infoRef.current;
 
-    if (!formattingWasAdded)
-      inputRef.current.setSelectionRange(cursorPosition, cursorPosition);
+    if (endOfSection) return;
+
+    inputRef.current.setSelectionRange(cursorPosition, cursorPosition);
   }, [value]);
 
   return (

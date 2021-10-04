@@ -1,6 +1,6 @@
 {
   "name": "react-input-auto-format",
-  "version": "1.0.4",
+  "version": "1.0.5",
   "author": "Daniel Yefet <daniel.yefet@gmail.com>",
   "description": "A super simple input component that formats as you type.",
   "keywords": [

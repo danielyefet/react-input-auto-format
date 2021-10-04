@@ -1,6 +1,0 @@
-dist
-.babelrc
-.gitignore
-.prettierignore
-.prettierrc
-rollup.config.js
