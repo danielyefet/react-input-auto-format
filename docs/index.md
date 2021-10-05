@@ -1,37 +1,58 @@
-## Welcome to GitHub Pages
+# react-input-auto-format
 
-You can use the [editor on GitHub](https://github.com/danielyefet/react-input-auto-format/edit/main/docs/index.md) to maintain and preview the content for your website in Markdown files.
+A super simple input component that formats as you type.
 
-Whenever you commit to this repository, GitHub Pages will run [Jekyll](https://jekyllrb.com/) to rebuild the pages in your site, from the content in your Markdown files.
-
-### Markdown
-
-Markdown is a lightweight and easy-to-use syntax for styling your writing. It includes conventions for
-
-```markdown
-Syntax highlighted code block
-
-# Header 1
-## Header 2
-### Header 3
-
-- Bulleted
-- List
-
-1. Numbered
-2. List
-
-**Bold** and _Italic_ and `Code` text
-
-[Link](url) and ![Image](src)
+```HTML
+<Input format="## - ## - ##">
 ```
 
-For more details see [GitHub Flavored Markdown](https://guides.github.com/features/mastering-markdown/).
+![Formatted input](https://raw.githubusercontent.com/danielyefet/react-input-auto-format/main/images/input.gif)
 
-### Jekyll Themes
+## Quickstart
 
-Your Pages site will use the layout and styles from the Jekyll theme you have selected in your [repository settings](https://github.com/danielyefet/react-input-auto-format/settings/pages). The name of this theme is saved in the Jekyll `_config.yml` configuration file.
+Install it:
 
-### Support or Contact
+```sh
+npm install react-input-auto-format
+```
 
-Having trouble with Pages? Check out our [documentation](https://docs.github.com/categories/github-pages-basics/) or [contact support](https://support.github.com/contact) and we’ll help you sort it out.
+Have fun:
+
+```JSX
+import Input from 'react-input-auto-format';
+
+function Foo () {
+    return <Input format="## - ## - ##" />;
+}
+```
+
+The `format` prop accepts a pattern. The `#` character represents any number or letter, and you can put whatever else you like in there.
+
+### Examples:
+
+| Style        | Pattern            | Result       |
+| ------------ | ------------------ | ------------ |
+| Expiry date  | \#\# / \#\#        | 12 / 34      |
+| Sort code    | \#\# - \#\# - \#\# | 12 - 34 - 56 |
+| Number plate | \#\#\#\# \#\#\#    | LM68 XKC     |
+
+## Getting the raw value
+
+To get the unformatted value, use the `onValueChange` prop.
+
+```JSX
+function Foo () {
+    handleValueChange(value) {
+        console.log(value); // 123456
+    }
+
+    return <Input
+        format="## - ## - ##"
+        onValueChange={handleValueChange}
+    />;
+}
+```
+
+## Everything else
+
+All other props work the same as you would expect for a native input component. If you want the formatted value, use a standard `onChange` attribute and pull out `event.target.value`.
