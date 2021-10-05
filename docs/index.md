@@ -1,6 +1,6 @@
-# react-input-auto-format
+If you've ever tried to make an input field that automatically formats as you type, you'll know it's actually a pain in the 🍑. That's right, a pain in the peach.
 
-A super simple input component that formats as you type.
+With this simple React component, you can create your own pattern using the `format` prop, start typing and witness the magic ✨
 
 ```HTML
 <Input format="## - ## - ##">
@@ -22,13 +22,12 @@ Have fun:
 import Input from 'react-input-auto-format';
 
 function Foo () {
-    return <Input format="## - ## - ##" />;
+    return <Input format="## / ##" />;
 }
 ```
 
-The `format` prop accepts a pattern. The `#` character represents any number or letter, and you can put whatever else you like in there.
+The `format` prop accepts any pattern - it's entirely up to you. Here's some inspiration:
 
-### Examples:
 
 | Style        | Pattern            | Result       |
 | ------------ | ------------------ | ------------ |
