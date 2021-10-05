@@ -11,6 +11,7 @@
   ],
   "license": "MIT",
   "repository": "danielyefet/react-input-auto-format",
+  "homepage": "https://danielyefet.github.io/react-input-auto-format",
   "main": "dist/index.js",
   "files": [
     "dist"
