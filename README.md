@@ -1,6 +1,6 @@
 # react-input-auto-format
 
-A super simple input component that formats as you type.
+React Input Auto Format (catchy, I know) automatically formats the value of an input field while you're typing in it.
 
 ```HTML
 <Input format="## - ## - ##">
