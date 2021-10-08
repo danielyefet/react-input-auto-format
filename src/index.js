@@ -2,8 +2,10 @@ import React, { useEffect, useRef, useState } from 'react';
 
 function noop() {}
 
-function format(value, pattern, placeholder = '#') {
+function format(value, pattern) {
   if (!pattern) return value;
+
+  const placeholder = '#';
 
   let endOfValue = 0;
   let characterIndex = 0;
@@ -46,7 +48,7 @@ function Input({
   value: userValue = '',
   ...rest
 }) {
-  const [value, setValue] = useState(userValue);
+  const [value, setValue] = useState(format(userValue, pattern));
   const inputRef = useRef();
   const infoRef = useRef({});
 

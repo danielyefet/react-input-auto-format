@@ -18,8 +18,15 @@
   ],
   "devDependencies": {
     "@babel/core": "^7.15.5",
+    "@babel/preset-env": "^7.15.8",
     "@babel/preset-react": "^7.14.5",
     "@rollup/plugin-babel": "^5.3.0",
+    "@testing-library/dom": "^8.7.2",
+    "@testing-library/react": "^12.1.2",
+    "@testing-library/user-event": "^13.2.1",
+    "babel-jest": "^27.2.5",
+    "jest": "^27.2.5",
+    "jest-dom": "^4.0.0",
     "react": "^17.0.2",
     "react-dom": "^17.0.2",
     "rollup": "^2.58.0"
@@ -30,6 +37,7 @@
   },
   "scripts": {
     "build": "rollup -c",
-    "start": "rollup -c -w"
+    "start": "rollup -c -w",
+    "test": "jest"
   }
 }
