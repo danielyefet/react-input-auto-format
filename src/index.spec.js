@@ -64,4 +64,31 @@ describe('The Input component', () => {
       expect(input.selectionStart).toBe(cursorPosition);
     }
   );
+
+  it('should use custom RegExp objects correctly', () => {    
+    const input = getInput({
+      format: '+1 (###) ###-##-##',
+      strip: /^(\+1)|[^\d]/g,
+      allow: /\d/g,
+    });
+
+    userEvent.type(input, 'a950123a4!(-812'),
+    expect(input.value).toBe('+1 (950) 123-48-12');
+  });
+
+  it('should input numbers in the correct order with a pattern that includes allowed characters (i.e. numbers) before the placeholder', () => {
+    const input = getInput({
+      format: '+1 (###) ###-##-##',
+      strip: /^(\+1)|[^\d]/g,
+      allow: /\d/g,
+    });
+
+    userEvent.type(input, '4812');
+    // Can't set selection range to 0, 0 because of some weird bug where setting it to 0, 0 does nothing in jest
+    // Checked it manually in a browser, and it works even when the cursor is moved to the start of a selection
+    input.setSelectionRange(2, 2);
+    userEvent.type(input, '950123');
+
+    expect(input.value).toBe('+1 (950) 123-48-12');
+  });
 });
